@@ -8,7 +8,27 @@ const requestBody = {
   ]
 };
 
-test('POST /everything-you-need/v1/calculate should return a status 200 and the warehouse details', async () => {
+// Test 1: Check Status Code
+test('POST /everything-you-need/v1/calculate should return status 200', async () => {
+  try {
+    const response = await fetch(`${config.API_URL}/everything-you-need/v1/calculate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    });
+    expect(response.status).toBe(200);
+  } catch (error) {
+    console.error('Error:', error);
+    throw new Error('Warehouse calculation failed');
+  }
+});
+
+// Blank line to separate the tests
+
+// Test 2: Parse and Validate Data
+test('POST /everything-you-need/v1/calculate should return the correct warehouse details', async () => {
   try {
     const response = await fetch(`${config.API_URL}/everything-you-need/v1/calculate`, {
       method: 'POST',
@@ -18,17 +38,13 @@ test('POST /everything-you-need/v1/calculate should return a status 200 and the 
       body: JSON.stringify(requestBody)
     });
 
-    // Check that the response status code is 200
-    expect(response.status).toBe(200);
-
     // Parse the response body as JSON
     const data = await response.json();
-    
+
     // Validate that the response contains the expected warehouse details
     expect(data).toHaveProperty('name', 'Everything You Need');
     expect(data).toHaveProperty('availableProducts');
     expect(Array.isArray(data.availableProducts)).toBe(true);
-
   } catch (error) {
     console.error('Error:', error);
     throw new Error('Warehouse calculation failed');
