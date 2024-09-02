@@ -25,7 +25,7 @@ test('POST /everything-you-need/v1/calculate should return status 200', async ()
   }
 });
 
-// Blank line to separate the tests
+// Separate the tests by one or more lines for clarity
 
 // Test 2: Parse and Validate Data
 test('POST /everything-you-need/v1/calculate should return the correct warehouse details', async () => {

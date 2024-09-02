@@ -21,6 +21,7 @@ test('PUT /api/v1/products/1 should return status 200', async () => {
   }
 });
 
+// Separate the tests by one or more lines for clarity
 
 // Test 2: Parse and Validate Data
 test('PUT /api/v1/products/1 should confirm the price update in the response', async () => {
